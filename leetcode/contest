@@ -1,0 +1,48 @@
+class Solution {
+    int value(const vector<int>& nums, int l, int r){
+        int ans = 0;
+        while(l <= r){
+            ans = ans ^ nums[l];
+            ++l;
+        }
+        return ans;
+    }
+public:
+    int maxXor(vector<int>& nums, int k) {
+
+        int ma = INT_MIN;
+        int mi = INT_MAX;
+
+        int ans = 0;
+
+        int l = 0;
+        int r = 0;
+
+        int n = nums.size();
+
+        while(r < n && l <= r){
+            ma = max(nums[r],ma);
+            mi = min(nums[r],mi);
+
+            if(abs(ma - mi) > k) ++l;
+            else{
+                ans = max(ans, value(nums,l,r));
+            }
+            ++r;
+        }
+
+        return ans;
+        
+        
+    }
+};
+
+
+You are given a non-negative integer array nums and an integer k.
+
+
+You must select a subarray of nums such that the difference between its maximum and minimum elements is at most k. The value of this subarray is the bitwise XOR of all elements in the subarray.
+
+Return an integer denoting the maximum possible value of the selected subarray.
+
+A subarray is a contiguous non-empty sequence of elements within an array.
